@@ -1,4 +1,25 @@
 "option strict"
+//new user table #
+function CreateUserTable(){
+    var table = document.getElementById('Side-Table');
+    table.innerHTML = '';
+    var row = '';
+    row += '<th style="text-align: right"> Create</th><th style="text-align: left">User</th>';
+    row += '<tr id="row1" ><td> First Name</td> <td><input id="fFirstName" placeholder="First Name"> </td></tr>'
+    row += '<tr id="row2"><td> Last Name</td> <td><input id="fLastName" placeholder="Last Name"> </td></tr>'
+    row += '<tr id="row3"><td> Email Address</td> <td><input id="fEmail" placeholder="Email Address"> </td>'
+    row += '</tr><tr id="row4"><td> Username</td> <td><input id="fUserName" placeholder="Username"> </td></tr>'
+    row += '<tr id="row5"><td> Password</td> <td><input id="fPassword" placeholder="Password" type="password"> </td></tr>'
+    row += '<tr id="row6"><td></td><td><button class="button" onclick="create()" on-release="" >Submit</button></td></tr>'
+    table.innerHTML += row;
+}
+
+
+
+
+
+
+
 //create a new user function User.html line 53
 function create(){
     var User = {
@@ -39,8 +60,9 @@ function listsort(){
 }
 //will display each and every user only gets called by the function above.
 function displayAll(users){
-    var tbody = document.getElementById("tbody");
+    var tbody = document.getElementById("table-main");
     tbody.innerHTML = '';
+    tbody.innerHTML = '<thead><th>Id</th><th>Todolist</th><th>New tasker</th><th>Username</th><th>Name</th><th>Email</th><th>Manager</th></thead>';   
     for(var user of users){
         var row ='';
         row+= "<tr>";
@@ -66,8 +88,9 @@ function find(){
 }
 //gets called by the function above to display a single user
 function displayfind(user){
-    var tbody = document.getElementById("tbody");
+    var tbody = document.getElementById("table-main");
     tbody.innerHTML = '';
+    tbody.innerHTML = '<thead><th>Id</th><th>Todolist</th><th>New tasker</th><th>Username</th><th>Name</th><th>Email</th><th>Manager</th></thead>';
         var row ='';
         row+= "<tr>";
         row+='<td id="userid">' + user.Id + '</td>';
@@ -80,9 +103,9 @@ function displayfind(user){
         row+="</tr>";
         tbody.innerHTML +=row + '<tr><td><button type="button" onclick="list();">Show all</td></tr>'
     }
- // 
+ //
 function addtolist(userID){ 
-    var table =document.getElementById("div2");
+    var table =document.getElementById("Side-Table");
     table.innerHTML = '';
     table.innerHTML= ' <tbody><thead id="thead"><th style="text-align: right"> Create</th><th style="text-align: left">Tasker</th>'
     
@@ -194,4 +217,8 @@ function addtolist(userID){
           
       
         
+    
+    
+    
+    
     

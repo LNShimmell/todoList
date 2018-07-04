@@ -16,7 +16,7 @@
 </head>
 <body >
 <div id="heading">
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark" style="color: bisque">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -35,47 +35,26 @@
                 Dropdown
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#" onclick="lister();">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#" onclick="CreateUserTable()">Create New User</a>
+                <a class="dropdown-item" href="#" onclick="list()">All Users</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="#" onclick="lister();">All Tasks</a>
               </div>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search by Id" aria-label="Search" id="findId">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search user by Id" aria-label="Search" id="findId">
             <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="find()">Search</button>
           </form>
         </div>
       </nav>
       </div>
       <div id="div1">  
-          <table id="div2" class="table table-sm table-dark">
+          <table id="Side-Table" class="table table-sm table-dark">
        
   
       
-          <th style="text-align: right"> Create</th><th style="text-align: left">User</th>
-      
-        <tr id="row1" >
-                <td> First Name</td> <td><input id="fFirstName" placeholder="First Name"> </td>
-        </tr>
-        <tr id="row2">
-                <td> Last Name</td> <td><input id="fLastName" placeholder="Last Name"> </td>
-        </tr>
-        <tr id="row3">
-                <td> Email Address</td> <td><input id="fEmail" placeholder="Email Address"> </td>
-            </tr>
-        <tr id="row4">
-                <td> Username</td> <td><input id="fUserName" placeholder="Username"> </td>
-            </tr>
-        <tr id="row5">
-            
-                <td> Password</td> <td><input id="fPassword" placeholder="Password" type="password"> </td>
-            
-        </tr>
-        <tr id="row6">
-            <td></td><td><button class="button" onclick="create()" on-release="" >Submit</button></td>
-        </tr>
+          
     
     
 
@@ -83,34 +62,8 @@
 
 </div>
 <table id="table-main" class="table table-sm table-dark">
-        <thead>
-            <th>
-                Id
-            </th>
-            <th>
-                Todolist
-            </th>
-            <th>
-                New tasker
-            </th>
-            <th>
-                Username
-            </th>
-            
-            <th>
-                Name
-            
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Manager
-            </th>
-        </thead>
-        <tbody id="tbody">
-    
-        </tbody>
+        
+        
     </table>
 
 
