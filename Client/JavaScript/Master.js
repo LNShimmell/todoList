@@ -20,7 +20,7 @@ function CreateUserTable(){
 
 
 
-//create a new user function User.html line 53
+//create a new user
 function create(){
     var User = {
         Id:0,
@@ -58,7 +58,7 @@ function listsort(){
         displayAll(response.Data);
     });
 }
-//will display each and every user only gets called by the function above.
+//will display each and every user only gets called by line 48 and line 55.
 function displayAll(users){
     var tbody = document.getElementById("table-main");
     tbody.innerHTML = '';
@@ -103,7 +103,7 @@ function displayfind(user){
         row+="</tr>";
         tbody.innerHTML +=row + '<tr><td><button type="button" onclick="list();">Show all</td></tr>'
     }
- //
+ //add a new task for a user.
 function addtolist(userID){ 
     var table =document.getElementById("Side-Table");
     table.innerHTML = '';
@@ -112,7 +112,7 @@ function addtolist(userID){
     table.innerHTML+='<tr><td> User Id</td><td><input id="fUserId" value="'+ userID + '" readonly></td></tr>';
     table.innerHTML+='<tr><td> Description</td><td><input id="fdescription"></td></tr>';
     table.innerHTML+='<tr><td> Notes</td><td><input id="fnotes"></td></tr>';
-    table.innerHTML+='<tr><td> Priority</td><td><input id="fpriority" type="number"></td></tr>';
+    table.innerHTML+='<tr><td> Priority</td><td><select name="Priority" id="fpriority" type="number"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select> 1 highest 5 lowest</td></tr>';
     table.innerHTML+= '<tr><td><button type="button" class="btn-sm" onclick="createuserlist();">Submit</button></td></tr></tbody>';
 }
 
@@ -155,14 +155,15 @@ function addtolist(userID){
         var table = document.getElementById("table-main");
         table.innerHTML = "";
         var row = '';
-        table.innerHTML+='<thead><th>Id</th><th>Priority</th><th>Description</th><th>User</th></thead>';
+        table.innerHTML+='<thead><th>Id</th><th>Priority</th><th>Description</th><th>User</th><th>Complete</th></thead>';
         for(var list of lists){
         row+= '<tr>';
-        row+= '<td>'+ list.Id + '</td>';
-        row+= '<td>'+ list.Priority + '</td>';
-        row+= '<td>'+ list.Description + '</td>';
-        row+= '<td>'+ list.User.Firstname + ' ' + list.User.Lastname + '</td></tr>';
-        
+        row+= '<td id="listId'+ list.Id + '">'+ list.Id + '</td>';
+        row+= '<td id="listPriority'+ list.Id + '">'+ list.Priority + '</td>';
+        row+= '<td id="listDescription'+ list.Id + '">'+ list.Description + '</td>';
+        row+= '<td>'+ list.User.Firstname + ' ' + list.User.Lastname + '</td>';
+        row+= '<td><button type="button" class="btn-sm" onclick="UpdateList('+ list.Id +')">Mark Complete</button></td>';
+        row+= '</tr>';
         }
         row+= '<tr><td><button type="button" class="btn-sm" onclick="sortlists();">Sort by Priority</button></td></tr></tbody>';
         table.innerHTML += row;
@@ -188,13 +189,16 @@ function addtolist(userID){
         table.innerHTML = "";
         var row = '';
         var id = 0;
-        table.innerHTML+='<thead><th>Id</th><th>Priority</th><th>Description</th><th>User</th></thead>';
+        table.innerHTML+='<thead><th>Id</th><th>Priority</th><th>Description</th><th>Name</th><th>UserId</th><th>Notes</th><th>Complete</th></thead>';
         for(var list of lists){
         row+= '<tr>';
         row+= '<td>'+ list.Id + '</td>';
-        row+= '<td>'+ list.Priority + '</td>';
-        row+= '<td>'+ list.Description + '</td>';
-        row+= '<td>'+ list.User.Firstname + ' ' + list.User.Lastname + '</td></tr>';
+        row+= '<td><input type="number" id="listPriority'+list.Id+'" value="' +list.Priority +'" readonly></td>';
+        row+= '<td><input type="text" id="listDescription'+list.Id+'" value="' +list.Description +'" readonly></td>';
+        row+= '<td>'+ list.User.Firstname + ' ' + list.User.Lastname + '</td><td><input type="text" id="user_ID'+list.Id+'" value="' +list.UserId +'" readonly></td>';
+        row+= '<td><input type="text" id="listNotes'+list.Id+'" value="' +list.Notes+'" readonly></td>';
+        row+= '<td><button type="button" class="btn-sm" onclick="UpdateList('+ list.Id +')">Mark Complete</button></td>';
+        row+= '</tr>';
         id = list.UserId;
         
         }
@@ -212,6 +216,33 @@ function addtolist(userID){
             console.log(response.Data)
             displayAlllistsSingleUser(response.Data)
         });
+    }
+
+    function UpdateList(id){
+        var Description = 'listDescription' + id;
+        var Notes = 'listNotes' + id;
+        var Priority = 'listPriority' + id;
+        var user_ID = 'user_ID' + id;
+        var secret = document.getElementById(user_ID).value;
+
+        var List = {
+            Id:id,
+            Description : document.getElementById(Description).value,
+            Notes: document.getElementById(Notes).value,
+            Priority: document.getElementById(Priority).value,
+            UserId: document.getElementById(user_ID).value,
+            IsCompleted: true
+    
+        }
+
+        $.post('http://localhost:51660/Lists/Edit', List)
+        .done(function(response){
+            console.log(response)
+            console.log(List)
+            tasklist(secret);
+
+        });
+
     }
       
           

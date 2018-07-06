@@ -97,7 +97,7 @@ namespace Todo.Controllers
 		[ActionName("ListbyUser")]
 		public JsonResponse ListbyUser(int? Id) {
 			JsonResponse json = new JsonResponse();
-			json.Data = db.Lists.Where(u => u.UserId == Id).ToList();
+			json.Data = db.Lists.Where(u => u.UserId == Id).Where(c => c.IsCompleted == false).ToList().ToList();
 
 			return json;
 		}
@@ -106,7 +106,7 @@ namespace Todo.Controllers
 		[ActionName("ListbyUser-sorted")]
 		public JsonResponse ListbyUsersort(int? Id) {
 			JsonResponse json = new JsonResponse();
-			IEnumerable<List> list = db.Lists.Where(u => u.UserId == Id).ToList();
+			IEnumerable<List> list = db.Lists.Where(u => u.UserId == Id).Where(c => c.IsCompleted == false).ToList();
 			json.Data = list.OrderBy(p => p.Priority).ToList();
 
 			return json;
