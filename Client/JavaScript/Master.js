@@ -202,7 +202,7 @@ function addtolist(userID){
         id = list.UserId;
         
         }
-        row+= '<tr><td><button type="button" class="btn-sm" onclick="sortlistsSingleUser('+ id +');">Sort by Priority</button></td></tr></tbody>';
+        row+= '<tr><td><button type="button" class="btn-sm" onclick="sortlistsSingleUser('+ id +');">Sort by Priority</button></td><td><button type="button" onclick="addtolist('+ id +  ');">New Task</button></td></tr></tbody>';
         table.innerHTML += row;
     }
 

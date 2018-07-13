@@ -6,10 +6,10 @@ using System.Web.Http;
 namespace Todo {
 	public static class WebApiConfig {
 		public static void Register(HttpConfiguration config) {
-			// Web API configuration and services
-
-			// Web API routes
-			config.MapHttpAttributeRoutes();
+            // Web API configuration and services
+            config.EnableCors();
+            // Web API routes
+            config.MapHttpAttributeRoutes();
 
 			config.Routes.MapHttpRoute(
 				name: "DefaultApi1",
